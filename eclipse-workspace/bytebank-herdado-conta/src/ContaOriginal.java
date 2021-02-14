@@ -1,4 +1,4 @@
-public abstract class Conta {
+public abstract class ContaOriginal {
 
     private double saldo;
     private int agencia;
@@ -6,18 +6,9 @@ public abstract class Conta {
     private Cliente titular;
     private static int total = 0;
 
-    public Conta(int agencia, int numero){
-    	
-            if(agencia < 1) {
-                throw new IllegalArgumentException("Agencia inválida");
-            }
-
-            if(numero < 1) {
-                throw new IllegalArgumentException("Numero da conta inválido");
-            }
-            
-        Conta.total++;
-        System.out.println("O total de contas é " + Conta.total);
+    public ContaOriginal(int agencia, int numero){
+        ContaOriginal.total++;
+        System.out.println("O total de contas é " + ContaOriginal.total);
         this.agencia = agencia;
         this.numero = numero;
         this.saldo = 100;
@@ -28,17 +19,22 @@ public abstract class Conta {
         this.saldo += valor;
     }
 
-    public void saca(double valor) throws SaldoInsuficienteException {
-        if(this.saldo < valor) {
-        	throw new SaldoInsuficienteException("Saldo Insuficiente "
-        											+ this.saldo + " Saque " + valor);
-        }  
-        this.saldo -= valor;
+    public boolean saca(double valor) {
+        if(this.saldo >= valor) {
+            this.saldo -= valor;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void transfere(double valor, Conta destino) throws SaldoInsuficienteException {
-        this.saca(valor);
-        destino.deposita(valor);
+    public boolean transfere(double valor, ContaOriginal destino) {
+        if(this.saca(valor)) {
+                destino.deposita(valor);
+                return true;
+        } else {
+                return false;
+        }
     }
 
     public double getSaldo(){
@@ -78,7 +74,7 @@ public abstract class Conta {
     }
 
     public static int getTotal(){
-        return Conta.total;
+        return ContaOriginal.total;
     }
 
 }
