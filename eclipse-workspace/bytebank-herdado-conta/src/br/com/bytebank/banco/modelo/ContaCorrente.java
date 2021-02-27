@@ -1,5 +1,6 @@
 package br.com.bytebank.banco.modelo;
 
+import java.io.Serializable;
 
 /**
 * Classe que representa uma Conta Corrente no ByteBank
@@ -7,7 +8,7 @@ package br.com.bytebank.banco.modelo;
 * @author Paty Feital
 * @version 0.1
 */
-public class ContaCorrente extends Conta implements Tributavel {
+public class ContaCorrente extends Conta implements Tributavel, Serializable {
 
         public ContaCorrente(int agencia, int numero) {
             super(agencia, numero);

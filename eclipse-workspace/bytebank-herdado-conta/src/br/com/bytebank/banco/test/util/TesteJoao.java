@@ -19,7 +19,7 @@ class TesteJoao {
         aulas.sort(null); 
 
         for (Aula aula : aulas) {
-            System.out.println(aula);
+        	System.out.println(aula);
         }
     }
 }
